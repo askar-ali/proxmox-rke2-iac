@@ -1,0 +1,4 @@
+proxmox_endpoint = "https://pve.example.internal:8006/"
+template_vm_id   = 9000
+ssh_public_keys  = ["ssh-ed25519 AAAA... ops@example"]
+# proxmox_api_token -> export TF_VAR_proxmox_api_token (from Vault)
