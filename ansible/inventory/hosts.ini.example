@@ -1,0 +1,15 @@
+[rke2_servers]
+rke2-server-1 ansible_host=192.0.2.10
+rke2-server-2 ansible_host=192.0.2.11
+rke2-server-3 ansible_host=192.0.2.12
+
+[rke2_agents]
+rke2-agent-1 ansible_host=192.0.2.20
+rke2-agent-2 ansible_host=192.0.2.21
+
+[rke2:children]
+rke2_servers
+rke2_agents
+
+[rke2:vars]
+ansible_user=ops

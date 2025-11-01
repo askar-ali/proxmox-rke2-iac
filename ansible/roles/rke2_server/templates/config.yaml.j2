@@ -1,0 +1,11 @@
+token: {{ rke2_token }}
+{% if inventory_hostname != groups['rke2_servers'][0] %}
+server: https://{{ rke2_api_vip }}:9345
+{% endif %}
+tls-san:
+  - {{ rke2_api_vip }}
+{% for san in rke2_tls_san %}
+  - {{ san }}
+{% endfor %}
+write-kubeconfig-mode: "0640"
+profile: cis

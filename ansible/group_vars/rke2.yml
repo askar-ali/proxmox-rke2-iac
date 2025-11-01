@@ -1,0 +1,6 @@
+---
+rke2_version: "v1.30.4+rke2r1"
+rke2_channel: stable
+rke2_api_vip: "192.0.2.10"          # first server; replace with a VIP for HA
+# Supplied at runtime from Vault: -e rke2_token=...
+rke2_token: "{{ lookup('env', 'RKE2_TOKEN') }}"

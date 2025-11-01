@@ -1,0 +1,12 @@
+---
+- name: Prepare all nodes
+  hosts: rke2
+  roles: [common]
+
+- name: Bootstrap control plane
+  hosts: rke2_servers
+  roles: [rke2_server]
+
+- name: Join workers
+  hosts: rke2_agents
+  roles: [rke2_agent]
