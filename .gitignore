@@ -9,3 +9,5 @@ ansible/inventory/hosts.ini
 *.retry
 .vault-token
 .env
+scripts/update_dates.sh
+kubeconfig-*.yaml

@@ -31,9 +31,46 @@
   args:
     creates: /usr/local/bin/rke2
 
+- name: Create etcd group (required by the CIS profile)
+  ansible.builtin.group:
+    name: etcd
+    system: true
+
+- name: Create etcd user (required by the CIS profile)
+  ansible.builtin.user:
+    name: etcd
+    group: etcd
+    system: true
+    shell: /sbin/nologin
+    create_home: false
+
+- name: Install RKE2 CIS kernel parameters
+  ansible.builtin.copy:
+    src: /usr/local/share/rke2/rke2-cis-sysctl.conf
+    dest: /etc/sysctl.d/60-rke2-cis.conf
+    remote_src: true
+    mode: "0644"
+  notify: Reload sysctl
+
+- name: Apply pending handlers before starting RKE2
+  ansible.builtin.meta: flush_handlers
+
 - name: Start rke2-server (first node first)
   ansible.builtin.service:
     name: rke2-server
     state: started
     enabled: true
   throttle: 1
+
+- name: Wait for the API server on the first node
+  ansible.builtin.wait_for:
+    port: 6443
+    timeout: 300
+  when: inventory_hostname == groups['rke2_servers'][0]
+
+- name: Fetch kubeconfig from the first server
+  ansible.builtin.fetch:
+    src: /etc/rancher/rke2/rke2.yaml
+    dest: "{{ playbook_dir }}/../../kubeconfig-{{ rke2_api_vip }}.yaml"
+    flat: true
+  when: inventory_hostname == groups['rke2_servers'][0]

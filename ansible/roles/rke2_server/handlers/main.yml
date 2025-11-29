@@ -3,3 +3,7 @@
   ansible.builtin.service:
     name: rke2-server
     state: restarted
+
+- name: Reload sysctl
+  ansible.builtin.command: systemctl restart systemd-sysctl
+  changed_when: true
