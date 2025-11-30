@@ -1,4 +1,4 @@
-.PHONY: fmt validate plan up lint
+.PHONY: fmt validate plan up lint destroy
 
 fmt:
 	terraform fmt -recursive terraform
@@ -12,3 +12,6 @@ plan:
 
 up:
 	scripts/provision.sh
+
+destroy:
+	cd terraform/environments/lab && terraform destroy

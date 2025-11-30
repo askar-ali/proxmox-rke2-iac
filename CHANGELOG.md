@@ -9,3 +9,6 @@
 
 ## Stage 1 - Basic
 - Repo scaffold, reusable `proxmox-vm` Terraform module.
+
+## Hardening
+- CIS prerequisites (etcd user, kernel sysctls), kubeconfig fetch, README quickstart, destroy target.
