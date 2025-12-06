@@ -34,8 +34,14 @@ variable "gateway" {
 }
 
 variable "server_count" {
-  type    = number
-  default = 3
+  description = "Control-plane nodes. Use an odd number for etcd quorum."
+  type        = number
+  default     = 3
+
+  validation {
+    condition     = var.server_count % 2 == 1
+    error_message = "server_count must be odd (1, 3, 5) to keep etcd quorum."
+  }
 }
 
 variable "agent_count" {

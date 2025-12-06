@@ -22,11 +22,21 @@ variable "vm_id" {
 variable "cores" {
   type    = number
   default = 2
+
+  validation {
+    condition     = var.cores >= 1 && var.cores <= 64
+    error_message = "cores must be between 1 and 64."
+  }
 }
 
 variable "memory_mb" {
   type    = number
   default = 4096
+
+  validation {
+    condition     = var.memory_mb >= 2048
+    error_message = "RKE2 nodes need at least 2048 MB of memory."
+  }
 }
 
 variable "disk_gb" {
@@ -47,6 +57,11 @@ variable "bridge" {
 variable "ipv4_cidr" {
   description = "Static address in CIDR form, e.g. 192.0.2.10/24."
   type        = string
+
+  validation {
+    condition     = can(cidrhost(var.ipv4_cidr, 0))
+    error_message = "ipv4_cidr must be a valid CIDR such as 192.0.2.10/24."
+  }
 }
 
 variable "gateway" {
