@@ -1,0 +1,12 @@
+---
+- name: Drop-in hardening config for sshd
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config.d/10-hardening.conf
+    content: |
+      PermitRootLogin {{ ssh_permit_root_login }}
+      PasswordAuthentication {{ ssh_password_authentication }}
+      MaxAuthTries {{ ssh_max_auth_tries }}
+      X11Forwarding no
+    mode: "0644"
+    validate: sshd -t -f %s
+  notify: Reload sshd

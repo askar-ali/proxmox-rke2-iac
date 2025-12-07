@@ -1,0 +1,6 @@
+---
+firewall_ssh_cidr: "0.0.0.0/0"
+firewall_cluster_cidr: "192.0.2.0/24"
+firewall_k8s_internal_cidrs:
+  - 10.42.0.0/16   # RKE2 default pod CIDR
+  - 10.43.0.0/16   # RKE2 default service CIDR

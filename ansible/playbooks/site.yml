@@ -1,7 +1,7 @@
 ---
 - name: Prepare all nodes
   hosts: rke2
-  roles: [common]
+  roles: [common, ssh_hardening, firewall]
 
 - name: Bootstrap control plane
   hosts: rke2_servers
