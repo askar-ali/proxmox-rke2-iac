@@ -9,3 +9,6 @@ tls-san:
 {% endfor %}
 write-kubeconfig-mode: "0640"
 profile: cis
+etcd-snapshot-schedule-cron: "0 */6 * * *"
+etcd-snapshot-retention: 14
+secrets-encryption: true
