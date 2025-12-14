@@ -1,4 +1,4 @@
-.PHONY: fmt validate plan up lint destroy
+.PHONY: fmt validate plan up lint destroy check hooks
 
 fmt:
 	terraform fmt -recursive terraform
@@ -15,3 +15,13 @@ up:
 
 destroy:
 	cd terraform/environments/lab && terraform destroy
+
+check:
+	scripts/check-cluster.sh
+
+lint:
+	cd ansible && ansible-lint playbooks roles
+	shellcheck scripts/*.sh
+
+hooks:
+	pre-commit install

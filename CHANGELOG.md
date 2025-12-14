@@ -12,3 +12,6 @@
 
 ## Hardening
 - CIS prerequisites (etcd user, kernel sysctls), kubeconfig fetch, README quickstart, destroy target.
+
+## Hardening round 2
+- Input validation, ssh_hardening and firewall roles, etcd snapshots, node add/remove scripts, health check, runbook, pre-commit, ansible-lint.

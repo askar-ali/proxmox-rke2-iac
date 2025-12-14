@@ -50,9 +50,19 @@ make destroy  # tear the VMs down
 
 The kubeconfig is fetched to the repo root as `kubeconfig-<vip>.yaml` (git-ignored).
 
+## Hardening included
+
+- SSH: key-only, no root login (`ssh_hardening`)
+- Host firewall: RKE2 ports only from the cluster network (`firewall`)
+- RKE2 `cis` profile, secrets encryption, 6-hourly etcd snapshots
+
 ## Scaling
 
 Raise `agent_count` in tfvars and run `make up`; only the new node is created and joined.
+
+## More docs
+
+- `docs/runbook.md` operations, `docs/troubleshooting.md`
 
 ## Status
 
